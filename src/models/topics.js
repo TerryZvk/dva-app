@@ -11,6 +11,15 @@ export default {
     }
   },
   subscriptions: {
+    setup({dispatch, history}){
+      dispatch({
+        type: 'queryTopics',
+        payload: {
+          tab: 'all',
+          page: 1
+        }
+      })
+    }
   },
   effects: {
     * queryTopics ( {payload = {}}, {call, put}){
