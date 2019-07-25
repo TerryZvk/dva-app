@@ -1,21 +1,16 @@
 import dva from 'dva';
 import './index.css';
-
+import { createBrowserHistory } from 'history' 
 // 1. Initialize
 const app = dva({
-  initialState: {
-    products: [
-      { name: 'dva', id: 1 },
-      { name: 'antd', id: 2 }
-    ]
-  }
+  history: createBrowserHistory()
 });
 
 // 2. Plugins
 // app.use({});
 
 // 3. Model
-app.model(require('./models/products').default);
+app.model(require('./models/topics').default);
 
 // 4. Router
 app.router(require('./router').default);
