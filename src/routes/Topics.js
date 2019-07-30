@@ -3,7 +3,7 @@ import { List, Avatar } from 'antd';
 
 class Topics extends React.Component {
   render() {
-    const { topicsList, topicLoading, dispatch, activeKey } = this.props
+    const { topicsList, topicLoading, dispatch, activeKey, history } = this.props
     return (
       <List
       pagination={{
@@ -26,7 +26,7 @@ class Topics extends React.Component {
           <List.Item.Meta
             avatar={<Avatar src={item.author.avatar_url} />}
             title={<a href='/'>{item.author.loginname}</a>}
-            description={<a href='/'>{item.title}</a>}
+            description={<a onClick={() => history.push(`/topic/${item.id}`, {id: item.id})}>{item.title}</a>}
           />
         </List.Item>
       )}

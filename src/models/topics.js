@@ -1,9 +1,10 @@
-import { getTopicsList } from '../services/topics'
+import { getTopicsList, getTopic } from '../services/topics'
 
 export default {
   namespace: 'topics',
   state: {
-    topicsList: []
+    topicsList: [],
+    topicDetail: {}
   },
   reducers: {
     setData (state, { payload }){
@@ -22,10 +23,16 @@ export default {
     }
   },
   effects: {
-    * queryTopics ( {payload = {}}, {call, put}){
+    * queryTopics ( {payload = {}}, { call, put }){
       const { data } = yield call(getTopicsList, payload)
       if(data.success){
         yield put({type: 'setData', payload: { topicsList: data.data }})
+      }
+    },
+    * getTopicDetail ( {payload = {}}, { call, put }){
+      const { data } = yield call(getTopic, payload)
+      if(data.success){
+        yield put({type: 'setData', payload: { topicDetail: data.data }})
       }
     }
   }
