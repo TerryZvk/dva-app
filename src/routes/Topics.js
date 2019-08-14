@@ -3,7 +3,7 @@ import { List, Avatar } from 'antd';
 
 class Topics extends React.Component {
   render() {
-    const { topicsList, topicLoading, dispatch, activeKey, history } = this.props
+    const { topicsList, topicLoading, dispatch, history } = this.props
     return (
       <List
       pagination={{
@@ -12,37 +12,26 @@ class Topics extends React.Component {
             type: 'topics/queryTopics',
             payload: {
               page,
-              tab: activeKey
+              per_page: 10
             }
           })
         },
-        pageSize: 10
+        pageSize: 10,
+        total: topicsList.total
       }}
       loading={topicLoading}
       itemLayout="horizontal"
-      dataSource={topicsList}
+      dataSource={topicsList.list}
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            avatar={<Avatar src={item.author.avatar_url} />}
-            title={<a href='/'>{item.author.loginname}</a>}
-            description={<a onClick={() => history.push(`/topic/${item.id}`, {id: item.id})}>{item.title}</a>}
+            // avatar={<Avatar src={item.author.avatar_url} />}
+            title={<a href='/'>{item.title}</a>}
+            description={<a href='http://www.baidu.com'>{item.content}</a>}
           />
         </List.Item>
       )}
     />
-      // <div>
-      //   {
-      //     topicsList.map(item => (
-      //       <div key={item.id}>
-      //         <div>{item.title}</div>
-      //         {/* <div>{item.content}</div> */}
-      //         <div>{item.author.loginname}  {item.create_at}</div>
-      //       </div>
-      //       )
-      //     )
-      //   }
-      // </div>
     )
   }
 }

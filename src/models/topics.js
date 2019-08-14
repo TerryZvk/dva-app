@@ -1,22 +1,33 @@
-import { getTopicsList, getTopic } from '../services/topics'
+import { getTopicsList } from '../services/topics'
 
 export default {
   namespace: 'topics',
   state: {
-    topicsList: [],
+    topicsList: {
+      list: [],
+      total: 0,
+      params: {
+        pageNum: 1,
+        pageSize: 10
+      }
+    },
     topicDetail: {}
   },
   reducers: {
     setData (state, { payload }){
       return { ...state, ...payload }
-    }
+    },
+    setTopicsList (state, { payload }) {
+      const topicsList = { ...state.topicsList, ...payload }
+      return { ...state, topicsList }
+    },
   },
   subscriptions: {
     setup({dispatch, history}){
       dispatch({
         type: 'queryTopics',
         payload: {
-          tab: 'all',
+          per_page: '10',
           page: 1
         }
       })
@@ -24,17 +35,22 @@ export default {
   },
   effects: {
     * queryTopics ( {payload = {}}, { call, put }){
-      const { data } = yield call(getTopicsList, payload)
-      if(data.success){
-        yield put({type: 'setData', payload: { topicsList: data.data }})
-      }
-    },
-    * getTopicDetail ( {payload = {}}, { call, put }){
-      const { data } = yield call(getTopic, payload)
-      if(data.success){
-        yield put({type: 'setData', payload: { topicDetail: data.data }})
+      const { data }  = yield call(getTopicsList, payload)
+      if(data.message === 'success'){
+        yield put({
+          type: 'setData', 
+          payload: { 
+            topicsList: {
+              list: data.data.microposts, 
+              total: data.data.paginate_meta.total_count,
+              params: {
+                pageNum: data.data.paginate_meta.current_page,
+                pageSize: 10,
+              }
+            } 
+          }
+        })
       }
     }
   }
-
 }

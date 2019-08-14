@@ -1,5 +1,5 @@
 module.exports = {
-  API_PREFIX: 'https://cnodejs.org/api/v1',
+  API_PREFIX: 'http://localhost:3000/api/v1',
   TABS_ARR:  [
     { tab: '全部', key: 'all' },
     { tab: '精华', key: 'good' },

@@ -2,14 +2,6 @@ import React from 'react'
 import { connect } from 'dva'
 
 class Topic extends React.Component {
-  componentDidMount(){
-    this.props.dispatch({
-      type: 'topics/getTopicDetail',
-      payload: {
-        id: this.props.history.location.state.id
-      }
-    })
-  }
   render(){
     const { topics } = this.props
     const topicDetail = topics.topicDetail || {}

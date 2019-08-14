@@ -1,15 +1,10 @@
 import request from '../utils/request'
-import { getTopicList, getTopicPath } from '../utils/api'
+import { getTopicList } from '../utils/api'
 
 export async function getTopicsList(params) {
-  return request(`${getTopicList}?tab=${params.tab}&page=${params.page}`, {
+  return request(`${getTopicList}?per_page=${params.per_page}&page=${params.page}`, {
     method: 'GET'
   })
 }
 
-export async function getTopic(params) {
-  return request(`${getTopicPath}/${params.id}`, {
-    method: 'GET'
-  })
-}
 
