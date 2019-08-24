@@ -1,9 +1,12 @@
 import React from 'react'
 import { List, Avatar } from 'antd';
+import { connect } from 'dva';
 
 class Topics extends React.Component {
   render() {
-    const { topicsList, topicLoading, dispatch, history } = this.props
+    const { topics, loading, dispatch, history } = this.props
+    const topicLoading = loading.effects['topics/queryTopics']
+    const topicsList = topics.topicsList || []
     return (
       <List
       pagination={{
@@ -36,4 +39,4 @@ class Topics extends React.Component {
   }
 }
 
-export default Topics
+export default connect(({ topics, loading }) => ({ topics, loading }))(Topics)

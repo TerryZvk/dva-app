@@ -1,7 +1,11 @@
 
 html, body, :global(#root) {
   height: 100%;
+  background-color: #fff;
 }
 :global(#root .ant-layout-header){
-  background: #444;
+  background: #f5f5f5;
+}
+:global(#root .ant-layout){
+  background: #fff;
 }
