@@ -1,3 +1,3 @@
 module.exports = {
-  API_PREFIX: 'http://localhost:3000/api/v1',
+  API_PREFIX: 'https://terryzvk-rails-api.herokuapp.com/api/v1',
 }

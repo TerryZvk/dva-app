@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 import styles from './App.css'
-import HeadNav from '../components/HeaderNav'
+import HeadNav from '../components/HeaderNav/'
 
 const { Content, Footer } = Layout
 
