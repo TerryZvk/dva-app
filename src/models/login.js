@@ -1,5 +1,5 @@
 export default {
-  namespace: 'app',
+  namespace: 'login',
   state: {
 
   },

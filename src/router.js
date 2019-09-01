@@ -1,24 +1,24 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router'
+import { routerRedux, Route, Switch } from 'dva/router'
 import App from './routes/App'
-import Topic from './routes/Topic'
-import Topics from './routes/Topics'
-import Login from './routes/Login'
-function RouterConfig({ history }) {
-  console.log(history)
-  
+import dynamic from 'dva/dynamic'
+import routes from './utils/routes'
+const {ConnectedRouter} = routerRedux
+function RouterConfig({ history, app }) {
   return (
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       {
-        history.location.pathname === '/login' ? <Route path="/login" exact component={Login} /> :
         <App>
           <Switch>
-            <Route path="/" exact component={Topics} />
-            <Route path="/topic/:id" exact component={Topic} />
+            {
+              routes.map(({path, name, ...dynamics}) => 
+                <Route path={path} key={name} exact component={dynamic({app, ...dynamics})} />
+              )
+            }
           </Switch>
         </App> 
       }
-    </Router>
+    </ConnectedRouter>
   );
 }
 
