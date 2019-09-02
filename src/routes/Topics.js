@@ -1,10 +1,10 @@
 import React from 'react'
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import { connect } from 'dva';
 
 class Topics extends React.Component {
   render() {
-    const { topics, loading, dispatch, history } = this.props
+    const { topics, loading, dispatch } = this.props
     const topicLoading = loading.effects['topics/queryTopics']
     const topicsList = topics.topicsList || []
     return (
@@ -28,7 +28,6 @@ class Topics extends React.Component {
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            // avatar={<Avatar src={item.author.avatar_url} />}
             title={<a href='/'>{item.title}</a>}
             description={<a href='http://www.baidu.com'>{item.content}</a>}
           />
