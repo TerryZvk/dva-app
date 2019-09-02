@@ -4,5 +4,6 @@ module.exports = {
   // 接收 get 参数
   // page Number 页数
   //per_page 每页topic数
-  getTopicList: `${API_PREFIX}/user/1/microposts.json`
+  getTopicList: `${API_PREFIX}/user/1/microposts.json`,
+  loginPath: `${API_PREFIX}/sessions`
 }

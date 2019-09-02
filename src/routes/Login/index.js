@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
         if (!err) {
           console.log('Received values of form: ', values);
           dispatch({
-            type: 'app/login',
+            type: 'login/login',
             payload: values
           })
         }
@@ -26,12 +26,12 @@ class LoginForm extends React.Component {
       <Form onSubmit={handleSubmit} className={styles["login-form"]}>
         <h2>登录</h2>
         <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: '请输入你的用户名！' }],
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: '请输入你的邮箱！' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
+              placeholder="请输入邮箱"
             />,
           )}
         </Form.Item>
@@ -39,10 +39,10 @@ class LoginForm extends React.Component {
           {getFieldDecorator('password', {
             rules: [{ required: true, message: '请输入密码！' }],
           })(
-            <Input
+            <Input.Password
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
-              placeholder="Password"
+              placeholder="请输入密码"
             />,
           )}
         </Form.Item>
