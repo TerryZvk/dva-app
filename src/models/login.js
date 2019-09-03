@@ -1,5 +1,4 @@
 import { login } from '../services/app'
-import { routerRudux } from 'dva/router' 
 export default {
   namespace: 'login',
   state: {

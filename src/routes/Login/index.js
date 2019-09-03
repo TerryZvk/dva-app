@@ -1,27 +1,32 @@
 
-import React from 'react';
-import { Link } from 'dva/router';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import React from 'react'
+import { Link } from 'dva/router'
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import styles from './style.css'
-import { connect } from 'dva';
+import { connect } from 'dva'
 
 class LoginForm extends React.Component {
 
   render() {
-    const { form, dispatch } = this.props;
-    const { getFieldDecorator } = form;
+    const { form, dispatch, history } = this.props
+    const { getFieldDecorator } = form
     const handleSubmit = e => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
-          dispatch({
-            type: 'login/login',
-            payload: values
+          console.log('Received values of form: ', values)
+          new Promise((resolve) => {
+            dispatch({
+              type: 'login/login',
+              payload: values,
+              resolve
+            })
+          }).then(() => {
+            history.push('/')
           })
         }
-      });
-    };
+      })
+    }
     return (
       <Form onSubmit={handleSubmit} className={styles["login-form"]}>
         <h2>登录</h2>
@@ -60,7 +65,7 @@ class LoginForm extends React.Component {
           或者 <Link to="/signup">现在就去注册！</Link>
         </Form.Item>
       </Form>
-    );
+    )
   }
 }
 export default connect()(Form.create()(LoginForm));
