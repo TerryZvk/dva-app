@@ -16,5 +16,11 @@ export default [
     name: 'login',
     models: () => [import('../models/login')],
     component: () => import('../routes/Login/index')
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    models: () => [import('../models/signup')],
+    component: () => import('../routes/Signup/index')
   }
 ]

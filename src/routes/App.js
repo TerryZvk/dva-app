@@ -15,7 +15,7 @@ const App = ({children, location}) => (
         children
       }
     </Content>
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    <Footer style={{textAlign:'center',position:'fixed',width:'100%',bottom:'0' }}>Tao's 部落格，一些好玩的</Footer>
   </Layout>
 )
 

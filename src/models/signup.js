@@ -1,6 +1,6 @@
-import { login } from '../services/app'
+import { getSignup } from '../services/app'
 export default {
-  namespace: 'login',
+  namespace: 'signup',
   state: {
 
   },
@@ -13,8 +13,8 @@ export default {
     }
   },
   effects: {
-    * login ( {payload = {}, resolve}, { call, put }){
-      const { data }  = yield call(login, payload)
+    * signup ( {payload = {}, resolve}, { call, put }){
+      const { data }  = yield call(getSignup, payload)
       if(data.message === 'success' && data.code === 200){
         resolve()
       }

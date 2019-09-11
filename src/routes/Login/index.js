@@ -23,6 +23,8 @@ class LoginForm extends React.Component {
             })
           }).then(() => {
             history.push('/')
+          }, () => {
+            throw new Error('邮箱或密码错误')
           })
         }
       })

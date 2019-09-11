@@ -1,30 +1,23 @@
-import fetch from 'dva/fetch';
+import axios from 'axios'
+import { message } from 'antd';
 
-function parseJSON(response) {
-  return response.json();
-}
+const request = axios.create()
+request.defaults.withCredentials = true
+request.defaults.timeout = 10000
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+
+// 响应拦截器
+request.interceptors.response.use((data) => {
+  return data
+}, (err) => {
+  const { response: { status } } = err
+  if (status === 401) {
+    // return Promise.reject(new Error('邮箱或密码不对！'))
+    console.log(err)
+    message.error('邮箱或密码不对！')
+    window.location.href = '/signup'
   }
+  return Promise.reject(err)
+})
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
-}
-
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(data => ({ data }))
-    .catch(err => ({ err }));
-}
+export default request
